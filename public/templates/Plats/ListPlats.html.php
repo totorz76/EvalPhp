@@ -1,3 +1,4 @@
+<a href="?page=AddPlats">Ajouter un plat</a>
 <table>
         <thead>
             <tr>

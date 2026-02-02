@@ -24,4 +24,4 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         exit;
     }
 }
-include PATH_PROJET . '/public/templates/Plats/AddPlats.html.php';
+include PATH_PROJET . '/public/templates/Plats/ListPlats.html.php';
