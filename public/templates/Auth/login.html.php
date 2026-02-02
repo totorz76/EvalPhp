@@ -1,19 +1,21 @@
-<h1>Connexion Cuisinier</h1>
+<form method="POST" action="">
+    <input type="hidden" name="csrf_token" value="<?= $_SESSION['csrf_token'] ?>">
 
-<?php if(!empty($error)): ?>
-    <p style="color:red"><?= htmlspecialchars($error) ?></p>
-<?php endif; ?>
-
-<form method="POST">
     <div>
         <label for="email">Email :</label>
-        <input type="email" id="email" name="email" value="<?= htmlspecialchars($_POST['email'] ?? '') ?>" required>
+        <input type="email" name="email" id="email" value="<?= htmlspecialchars($_POST['email'] ?? '') ?>" required>
     </div>
 
     <div>
         <label for="password">Mot de passe :</label>
-        <input type="password" id="password" name="password" required>
+        <input type="password" name="password" id="password" required>
     </div>
+
+    <?php if (!empty($error)): ?>
+        <p><?= htmlspecialchars($error) ?></p>
+    <?php endif; ?>
 
     <button type="submit">Se connecter</button>
 </form>
+
+<p>Vous n'avez pas encore de compte ? <a href="?page=register">S'inscrire</a></p>

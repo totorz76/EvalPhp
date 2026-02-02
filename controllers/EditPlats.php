@@ -10,7 +10,6 @@ $errors = [];
 
 // Vérification de l’ID du plat
 $id = isset($_GET['id']) ? (int)$_GET['id'] : 0;
-
 if ($id <= 0) {
     echo "Plat invalide";
     exit;
@@ -18,23 +17,31 @@ if ($id <= 0) {
 
 // Récupération du plat
 $plat = getPlatById($id);
-
 if (!$plat) {
     echo "Plat introuvable";
     exit;
 }
 
-// Sécurité majeure : le plat doit appartenir au cuisinier connecté
+// 🔐 Sécurité : le plat doit appartenir au cuisinier connecté
 if ($plat['cuisinier_id'] != $cuisinier_id) {
     echo "Accès interdit";
     exit;
 }
 
-// Récupération des catégories pour le select
+// Catégories
 $categories = getAllCategories();
 
 // Traitement du formulaire
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+
+    // 🔐 Vérification CSRF
+    if (
+        empty($_POST['csrf_token']) ||
+        $_POST['csrf_token'] !== $_SESSION['csrf_token']
+    ) {
+        die('Action non autorisée (CSRF)');
+    }
+
     $nom = trim($_POST['nom'] ?? '');
     $type_id = (int)($_POST['type_id'] ?? 0);
     $description = trim($_POST['description'] ?? '');
@@ -43,25 +50,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (strlen($nom) < 3) {
         $errors['nom'] = "Le nom doit contenir au moins 3 caractères";
     }
-
     if ($type_id <= 0) {
         $errors['type'] = "Type invalide";
     }
-
-    if (empty($description)) {
-        $errors['description'] = "La description est obligatoire";
+    if (strlen($description) < 3) {
+        $errors['description'] = "La description est obligatoire (min 3 caractères)";
     }
 
     // Mise à jour si aucune erreur
     if (empty($errors)) {
-        $success = updatePlats(
-            $id,
-            $nom,
-            $type_id,
-            $description,
-            $cuisinier_id
-        );
-
+        $success = updatePlats($id, $nom, $type_id, $description, $cuisinier_id);
         if ($success) {
             header('Location: ?page=ListPlats');
             exit;

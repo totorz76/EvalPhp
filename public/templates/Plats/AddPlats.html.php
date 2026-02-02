@@ -5,6 +5,7 @@
 <?php endif; ?>
 
 <form method="POST" action="">
+    <input type="hidden" name="csrf_token" value="<?= $_SESSION['csrf_token'] ?>">
     <!-- Cuisinier connecté (affichage uniquement) -->
     <p>
         <strong>Cuisinier :</strong>
@@ -20,8 +21,7 @@
             name="nom"
             value="<?= htmlspecialchars($_POST['nom'] ?? '') ?>"
             required
-            minlength="3"
-        >
+            minlength="3">
         <?php if (!empty($errors['nom'])): ?>
             <p><?= htmlspecialchars($errors['nom']) ?></p>
         <?php endif; ?>
@@ -35,8 +35,7 @@
             <?php foreach ($categories as $categorie): ?>
                 <option
                     value="<?= $categorie['id'] ?>"
-                    <?= (($_POST['type_id'] ?? '') == $categorie['id']) ? 'selected' : '' ?>
-                >
+                    <?= (($_POST['type_id'] ?? '') == $categorie['id']) ? 'selected' : '' ?>>
                     <?= htmlspecialchars($categorie['nom']) ?>
                 </option>
             <?php endforeach; ?>
@@ -53,8 +52,7 @@
             id="description"
             name="description"
             required
-            minlength="3"
-        ><?= htmlspecialchars($_POST['description'] ?? '') ?></textarea>
+            minlength="3"><?= htmlspecialchars($_POST['description'] ?? '') ?></textarea>
         <?php if (!empty($errors['description'])): ?>
             <p><?= htmlspecialchars($errors['description']) ?></p>
         <?php endif; ?>

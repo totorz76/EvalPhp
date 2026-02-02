@@ -21,7 +21,7 @@ if (!$plat) {
     exit;
 }
 
-// 🔐 Vérification de propriété
+// Vérification de propriété
 if ($plat['cuisinier_id'] != $cuisinier_id) {
     echo "Accès interdit";
     exit;

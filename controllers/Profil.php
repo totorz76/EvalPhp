@@ -9,30 +9,34 @@ $cuisinier_id = $_SESSION['cuisinier_id'];
 $cuisinier = getCuisinierById($cuisinier_id);
 $errors = [];
 
+// POST
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+
+    // 🔐 CSRF
+    if (empty($_POST['csrf_token']) || $_POST['csrf_token'] !== $_SESSION['csrf_token']) {
+        die('Action non autorisée (CSRF)');
+    }
+
     $nom = trim($_POST['nom'] ?? $cuisinier['nom']);
     $specialite = trim($_POST['specialite'] ?? $cuisinier['specialite']);
     $email = trim($_POST['email'] ?? $cuisinier['email']);
     $password = $_POST['password'] ?? '';
     $avatarPath = $cuisinier['avatar'];
 
-    // Validation minimale
+    // Validation
     if (strlen($nom) < 2) $errors[] = "Nom trop court";
     if (!filter_var($email, FILTER_VALIDATE_EMAIL)) $errors[] = "Email invalide";
     if (!empty($password) && strlen($password) < 8) $errors[] = "Mot de passe trop court (>8 caractères)";
 
-    // Upload avatar si présent
+    // Upload avatar
     if (!empty($_FILES['avatar']['name'])) {
         $file = $_FILES['avatar'];
         $allowed = ['jpg','jpeg','png','webp'];
         $ext = strtolower(pathinfo($file['name'], PATHINFO_EXTENSION));
 
-        if ($file['size'] > 2*1024*1024) {
-            $errors[] = "Avatar trop lourd (<2Mo)";
-        }
-        if (!in_array($ext, $allowed)) {
-            $errors[] = "Format avatar invalide (jpg, jpeg, png, webp)";
-        }
+        if ($file['size'] > 2*1024*1024) $errors[] = "Avatar trop lourd (<2Mo)";
+        if (!in_array($ext, $allowed)) $errors[] = "Format avatar invalide (jpg, jpeg, png, webp)";
+        if (!is_uploaded_file($file['tmp_name'])) $errors[] = "Fichier invalide";
 
         if (empty($errors)) {
             $newName = uniqid('avatar_') . '.' . $ext;
@@ -42,7 +46,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
     }
 
-    // Hash mot de passe si renseigné
+    // Hash password si fourni
     $hashedPassword = !empty($password) ? password_hash($password, PASSWORD_DEFAULT) : $cuisinier['password'];
 
     if (empty($errors)) {

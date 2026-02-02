@@ -9,6 +9,7 @@
 <?php endif; ?>
 
 <form method="POST">
+    <input type="hidden" name="csrf_token" value="<?= $_SESSION['csrf_token'] ?>">
     <div>
         <label for="nom">Nom du plat</label>
         <input

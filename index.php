@@ -7,6 +7,9 @@ include PATH_PROJET . '/model/Categories.php';
 include PATH_PROJET . '/model/Plats.php';
 
 
+if (empty($_SESSION['csrf_token'])) {
+    $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
+}
 
 $page = filter_input(INPUT_GET, 'page', FILTER_SANITIZE_FULL_SPECIAL_CHARS) ?? 'home';
 

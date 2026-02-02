@@ -15,6 +15,16 @@ $platsArray = getPlatsByCuisinier($cuisinier_id);
 $categories = getAllCategories();
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+
+    if (
+        empty($_POST['csrf_token']) ||
+        $_POST['csrf_token'] !== $_SESSION['csrf_token']
+    ) {
+        die('Action non autorisée (CSRF)');
+    }
+}
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $nom = trim($_POST['nom'] ?? '');
     $type_id = (int)($_POST['type_id'] ?? 0);
     $description = trim($_POST['description'] ?? '');
