@@ -27,4 +27,10 @@ function createPlat($nom, $type_id, $description, $cuisinier_id) {
         ':description' => $description,
         ':cuisinier_id' => $cuisinier_id
     ]);
+
+    function deletePlat($id) {
+        global $pdo;
+        $stmt = $pdo->prepare("DELETE FROM plats WHERE id = :id");
+        return $stmt->execute([':id' => $id]);
+    }
 }
