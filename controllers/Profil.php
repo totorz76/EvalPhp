@@ -52,7 +52,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (empty($errors)) {
         if (updateCuisinier($cuisinier_id, $nom, $specialite, $email, $hashedPassword, $avatarPath)) {
             $_SESSION['cuisinier_nom'] = $nom;
-            header('Location: ?page=Profile');
+            $_SESSION['cuisinier_avatar'] = $avatarPath;
+            header('Location: ?page=Profil');
             exit;
         } else {
             $errors[] = "Erreur lors de la mise à jour du profil";

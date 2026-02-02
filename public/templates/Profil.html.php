@@ -1,32 +1,56 @@
-<h1>Mon profil</h1>
+<main class="container my-5">
+    <h1 class="mb-4 text-center">Mon profil</h1>
 
-<?php if (!empty($errors)): ?>
-    <ul>
-        <?php foreach ($errors as $err): ?>
-            <li><?= htmlspecialchars($err) ?></li>
-        <?php endforeach; ?>
-    </ul>
-<?php endif; ?>
+    <?php if (!empty($errors)): ?>
+        <div class="alert alert-danger">
+            <ul class="mb-0">
+                <?php foreach ($errors as $err): ?>
+                    <li><?= htmlspecialchars($err) ?></li>
+                <?php endforeach; ?>
+            </ul>
+        </div>
+    <?php endif; ?>
 
-<form method="POST" enctype="multipart/form-data">
-    <input type="hidden" name="csrf_token" value="<?= $_SESSION['csrf_token'] ?>">
-    <div>
-        <label for="email">Email :</label>
-        <input type="email" id="email" name="email" value="<?= htmlspecialchars($cuisinier['email']) ?>" required>
-    </div>
+    <form method="POST" enctype="multipart/form-data" class="needs-validation" novalidate>
+        <input type="hidden" name="csrf_token" value="<?= $_SESSION['csrf_token'] ?>">
 
-    <div>
-        <label for="password">Nouveau mot de passe (laisser vide si inchangé) :</label>
-        <input type="password" id="password" name="password">
-    </div>
+        <div class="mb-3">
+            <label for="email" class="form-label">Email :</label>
+            <input type="email" id="email" name="email" class="form-control" 
+                   value="<?= htmlspecialchars($cuisinier['email']) ?>" required>
+        </div>
 
-    <div>
-        <label for="avatar">Avatar :</label>
-        <?php if (!empty($cuisinier['avatar'])): ?>
-            <img src="<?= htmlspecialchars($cuisinier['avatar']) ?>" alt="Avatar" width="100">
-        <?php endif; ?>
-        <input type="file" id="avatar" name="avatar" accept=".jpg,.jpeg,.png,.webp">
-    </div>
+        <div class="mb-3">
+            <label for="password" class="form-label">Nouveau mot de passe (laisser vide si inchangé) :</label>
+            <input type="password" id="password" name="password" class="form-control">
+        </div>
 
-    <button type="submit">Mettre à jour</button>
-</form>
+        <div class="mb-3">
+            <label for="avatar" class="form-label">Avatar :</label><br>
+            <?php if (!empty($cuisinier['avatar'])): ?>
+                <img src="<?= htmlspecialchars($cuisinier['avatar']) ?>" alt="Avatar" width="100" class="mb-2 rounded">
+            <?php endif; ?>
+            <input type="file" id="avatar" name="avatar" class="form-control" accept=".jpg,.jpeg,.png,.webp">
+        </div>
+
+        <button type="submit" class="btn btn-primary">Mettre à jour</button>
+    </form>
+</main>
+
+<!-- Optionnel : script de validation Bootstrap -->
+<script>
+    // Exemple simple pour validation client
+    (function () {
+        'use strict'
+        const forms = document.querySelectorAll('.needs-validation')
+        Array.from(forms).forEach(form => {
+            form.addEventListener('submit', event => {
+                if (!form.checkValidity()) {
+                    event.preventDefault()
+                    event.stopPropagation()
+                }
+                form.classList.add('was-validated')
+            }, false)
+        })
+    })()
+</script>

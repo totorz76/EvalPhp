@@ -27,6 +27,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             // Login réussi
             $_SESSION['cuisinier_id'] = $cuisinier['id'];
             $_SESSION['cuisinier_nom'] = $cuisinier['nom'];
+            $_SESSION['cuisinier_avatar'] = $cuisinier['avatar'];
             header('Location: ?page=ListPlats'); // redirection vers le CRUD
             exit;
         } else {

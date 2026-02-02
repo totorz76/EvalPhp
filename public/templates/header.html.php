@@ -45,18 +45,23 @@
 
                 <?php if (isset($_SESSION['cuisinier_id'])): ?>
                     <!-- Section utilisateur connecté à droite -->
-                    <span class="navbar-text me-3">
-                        Bonjour, <?= htmlspecialchars($_SESSION['cuisinier_nom']) ?>
-                    </span>
-                    <a class="btn btn-outline-light" href="?page=Profil">Profil</a>
+                    <div class="d-flex align-items-center">
+                        <?php if (!empty($_SESSION['cuisinier_avatar'])): ?>
+                            <img src="<?= htmlspecialchars($_SESSION['cuisinier_avatar']) ?>" 
+                                 alt="Avatar" 
+                                 class="rounded-circle me-2" 
+                                 style="width:35px; height:35px; object-fit:cover;">
+                        <?php endif; ?>
+                        <span class="navbar-text me-3">
+                            Bonjour, <?= htmlspecialchars($_SESSION['cuisinier_nom']) ?>
+                        </span>
+                        <a class="btn btn-outline-light" href="?page=Profil">Profil</a>
+                    </div>
                 <?php endif; ?>
             </div>
         </div>
     </nav>
 </header>
 
-<!-- Pense à ajouter le script JS de Bootstrap à la fin du body pour le collapse -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 
-    <main>
-        !
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
