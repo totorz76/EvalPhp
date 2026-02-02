@@ -1,0 +1,11 @@
+<?php
+
+define("PATH_PROJET", $_SERVER['DOCUMENT_ROOT'] . "/EvalPhp");
+define("WEB_ROOT", "/EvalPhp");
+
+$routes = [
+    'home' => PATH_PROJET . '/public/templates/accueil.html.php',
+    '404' => PATH_PROJET . '/404.php',
+    'AddPlats' => PATH_PROJET . '/controllers/AddPlats.php'
+
+];
