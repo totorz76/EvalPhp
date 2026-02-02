@@ -8,5 +8,6 @@
 <body>
     <h1>OUI</h1>
     <a href="?page=AddPlats">Ajouter un plat</a>
+    <a href="?page=ListPlats">Liste des Plats</a>
 </body>
 </html>
