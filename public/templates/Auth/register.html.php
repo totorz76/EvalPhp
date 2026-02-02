@@ -1,38 +1,90 @@
-<h1>Inscription Cuisinier</h1>
+<main class="container my-5" style="max-width: 500px;">
+    <h2 class="mb-4">Inscription Cuisinier</h2>
 
-<?php if(!empty($errors)): ?>
-    <ul>
-        <?php foreach($errors as $err): ?>
-            <li><?= htmlspecialchars($err) ?></li>
-        <?php endforeach; ?>
-    </ul>
-<?php endif; ?>
+    <?php if(!empty($errors)): ?>
+        <div class="alert alert-danger">
+            <ul class="mb-0">
+                <?php foreach($errors as $err): ?>
+                    <li><?= htmlspecialchars($err) ?></li>
+                <?php endforeach; ?>
+            </ul>
+        </div>
+    <?php endif; ?>
 
-<form method="POST" enctype="multipart/form-data">
-    <div>
-        <label for="nom">Nom :</label>
-        <input type="text" id="nom" name="nom" value="<?= htmlspecialchars($_POST['nom'] ?? '') ?>" required>
-    </div>
+    <form method="POST" enctype="multipart/form-data" class="needs-validation" novalidate>
+        <!-- CSRF token -->
+        <input type="hidden" name="csrf_token" value="<?= $_SESSION['csrf_token'] ?>">
 
-    <div>
-        <label for="email">Email :</label>
-        <input type="email" id="email" name="email" value="<?= htmlspecialchars($_POST['email'] ?? '') ?>" required>
-    </div>
+        <!-- Nom -->
+        <div class="mb-3">
+            <label for="nom" class="form-label">Nom</label>
+            <input 
+                type="text" 
+                id="nom" 
+                name="nom" 
+                class="form-control" 
+                value="<?= htmlspecialchars($_POST['nom'] ?? '') ?>" 
+                required
+            >
+        </div>
 
-    <div>
-        <label for="password">Mot de passe :</label>
-        <input type="password" id="password" name="password" required>
-    </div>
+        <!-- Email -->
+        <div class="mb-3">
+            <label for="email" class="form-label">Email</label>
+            <input 
+                type="email" 
+                id="email" 
+                name="email" 
+                class="form-control" 
+                value="<?= htmlspecialchars($_POST['email'] ?? '') ?>" 
+                required
+            >
+        </div>
 
-    <div>
-        <label for="avatar">Avatar :</label>
-        <input type="file" id="avatar" name="avatar" accept=".jpg,.jpeg,.png,.webp">
-    </div>
+        <!-- Mot de passe -->
+        <div class="mb-3">
+            <label for="password" class="form-label">Mot de passe</label>
+            <input 
+                type="password" 
+                id="password" 
+                name="password" 
+                class="form-control" 
+                required
+            >
+            <div class="form-text">
+                Minimum 8 caractères.
+            </div>
+        </div>
 
-    <div>
-        <label for="specialite">Spécialité :</label>
-        <input type="text" id="specialite" name="specialite" value="<?= htmlspecialchars($_POST['specialite'] ?? '') ?>">
-    </div>
+        <!-- Avatar -->
+        <div class="mb-3">
+            <label for="avatar" class="form-label">Avatar</label>
+            <input 
+                type="file" 
+                id="avatar" 
+                name="avatar" 
+                class="form-control" 
+                accept=".jpg,.jpeg,.png,.webp"
+            >
+        </div>
 
-    <button type="submit">S’inscrire</button>
-</form>
+        <!-- Spécialité -->
+        <div class="mb-3">
+            <label for="specialite" class="form-label">Spécialité</label>
+            <input 
+                type="text" 
+                id="specialite" 
+                name="specialite" 
+                class="form-control" 
+                value="<?= htmlspecialchars($_POST['specialite'] ?? '') ?>"
+            >
+        </div>
+
+        <!-- Bouton submit -->
+        <button type="submit" class="btn btn-primary w-100">S’inscrire</button>
+    </form>
+
+    <p class="mt-3 text-center">
+        Déjà inscrit ? <a href="?page=Login">Se connecter</a>
+    </p>
+</main>
