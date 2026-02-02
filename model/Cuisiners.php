@@ -2,13 +2,15 @@
 
 require_once __DIR__ . '/../config/pdo.php';
 
-function getAllCuisiniers() {
-     global $pdo;
-    $stmt = $pdo->prepare ("SELECT * FROM cuisiniers");
+function getAllCuisiniers()
+{
+    global $pdo;
+    $stmt = $pdo->prepare("SELECT * FROM cuisiniers");
     $stmt->execute();
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
-function createCuisinier($nom, $specialite, $email, $password, $avatar = null) {
+function createCuisinier($nom, $specialite, $email, $password, $avatar = null)
+{
     global $pdo;
 
     $stmt = $pdo->prepare("
@@ -24,19 +26,22 @@ function createCuisinier($nom, $specialite, $email, $password, $avatar = null) {
         ':avatar' => $avatar
     ]);
 }
-function getCuisinierByEmail($email) {
+function getCuisinierByEmail($email)
+{
     global $pdo;
     $stmt = $pdo->prepare("SELECT * FROM cuisiniers WHERE email = :email");
     $stmt->execute([':email' => $email]);
     return $stmt->fetch(PDO::FETCH_ASSOC);
 }
-function getCuisinierById($id) {
+function getCuisinierById($id)
+{
     global $pdo;
     $stmt = $pdo->prepare("SELECT * FROM cuisiniers WHERE id = :id");
     $stmt->execute([':id' => $id]);
     return $stmt->fetch(PDO::FETCH_ASSOC);
 }
-function updateCuisinier ($id, $nom, $specialite, $email, $password, $avatar = null) {
+function updateCuisinier($id, $nom, $specialite, $email, $password, $avatar = null)
+{
     global $pdo;
     $stmt = $pdo->prepare("
         UPDATE cuisiniers
@@ -51,4 +56,18 @@ function updateCuisinier ($id, $nom, $specialite, $email, $password, $avatar = n
         ':password' => $password,
         ':avatar' => $avatar
     ]);
+}
+function getPlatsByCuisinier($cuisinier_id)
+{
+    global $pdo;
+    $stmt = $pdo->prepare("
+        SELECT plats.*, categories.nom AS type, cuisiniers.nom AS cuisinier
+        FROM plats
+        JOIN categories ON plats.type_id = categories.id
+        JOIN cuisiniers ON plats.cuisinier_id = cuisiniers.id
+        WHERE cuisinier_id = :cuisinier_id
+        ORDER BY plats.id DESC
+    ");
+    $stmt->execute([':cuisinier_id' => $cuisinier_id]);
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
