@@ -1,6 +1,5 @@
 <?php
-require_once __DIR__ . '/../models/Cuisiniers.php';
-$errors = [];
+
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
@@ -50,4 +49,4 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 
 // Vue
-include __DIR__ . '/../views/auth/register.php';
+include PATH_PROJET . '/public/templates/Auth/register.html.php';
