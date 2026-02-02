@@ -5,6 +5,7 @@ require_once __DIR__ . '/config/routes.php';
 include PATH_PROJET . '/model/Cuisiners.php';
 include PATH_PROJET . '/model/Categories.php';
 include PATH_PROJET . '/model/Plats.php';
+include PATH_PROJET . '/model/Karadoc.php';
 
 
 if (empty($_SESSION['csrf_token'])) {
