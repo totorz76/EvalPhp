@@ -1,54 +1,64 @@
-<h1>Modifier le plat</h1>
+<main class="container my-5">
+    <h2>Modifier le plat</h2>
 
-<?php if (!empty($errors)): ?>
-    <ul>
-        <?php foreach ($errors as $error): ?>
-            <li><?= htmlspecialchars($error) ?></li>
-        <?php endforeach; ?>
-    </ul>
-<?php endif; ?>
+    <?php if (!empty($errors)): ?>
+        <div class="alert alert-danger">
+            <ul class="mb-0">
+                <?php foreach ($errors as $error): ?>
+                    <li><?= htmlspecialchars($error) ?></li>
+                <?php endforeach; ?>
+            </ul>
+        </div>
+    <?php endif; ?>
 
-<form method="POST">
-    <input type="hidden" name="csrf_token" value="<?= $_SESSION['csrf_token'] ?>">
-    <div>
-        <label for="nom">Nom du plat</label>
-        <input
-            type="text"
-            id="nom"
-            name="nom"
-            required
-            minlength="3"
-            value="<?= htmlspecialchars($plat['nom']) ?>"
-        >
-    </div>
+    <form method="POST" class="needs-validation" novalidate>
+        <!-- CSRF -->
+        <input type="hidden" name="csrf_token" value="<?= $_SESSION['csrf_token'] ?>">
 
-    <div>
-        <label for="type_id">Type</label>
-        <select name="type_id" id="type_id" required>
-            <option value="">-- Choisir --</option>
-            <?php foreach ($categories as $categorie): ?>
-                <option
-                    value="<?= $categorie['id'] ?>"
-                    <?= $categorie['id'] == $plat['type_id'] ? 'selected' : '' ?>
-                >
-                    <?= htmlspecialchars($categorie['nom']) ?>
-                </option>
-            <?php endforeach; ?>
-        </select>
-    </div>
+        <!-- Nom du plat -->
+        <div class="mb-3">
+            <label for="nom" class="form-label">Nom du plat</label>
+            <input
+                type="text"
+                id="nom"
+                name="nom"
+                class="form-control"
+                required
+                minlength="3"
+                value="<?= htmlspecialchars($plat['nom']) ?>"
+            >
+        </div>
 
-    <div>
-        <label for="description">Description</label>
-        <textarea
-            name="description"
-            id="description"
-            rows="5"
-            required
-        ><?= htmlspecialchars($plat['description']) ?></textarea>
-    </div>
+        <!-- Type -->
+        <div class="mb-3">
+            <label for="type_id" class="form-label">Type</label>
+            <select name="type_id" id="type_id" class="form-select" required>
+                <option value="">-- Choisir --</option>
+                <?php foreach ($categories as $categorie): ?>
+                    <option
+                        value="<?= $categorie['id'] ?>"
+                        <?= $categorie['id'] == $plat['type_id'] ? 'selected' : '' ?>
+                    >
+                        <?= htmlspecialchars($categorie['nom']) ?>
+                    </option>
+                <?php endforeach; ?>
+            </select>
+        </div>
 
-    <!-- sécurité : cuisinier_id vient de la session, pas d'un input -->
-    <button type="submit">Mettre à jour</button>
-</form>
+        <!-- Description -->
+        <div class="mb-3">
+            <label for="description" class="form-label">Description</label>
+            <textarea
+                name="description"
+                id="description"
+                rows="5"
+                class="form-control"
+                required
+            ><?= htmlspecialchars($plat['description']) ?></textarea>
+        </div>
 
-<a href="?page=ListPlats">Retour à la liste</a>
+        <!-- Bouton -->
+        <button type="submit" class="btn btn-success">Mettre à jour</button>
+        <a href="?page=ListPlats" class="btn btn-secondary ms-2">Retour à la liste</a>
+    </form>
+</main>
