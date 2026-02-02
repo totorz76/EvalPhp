@@ -4,7 +4,8 @@ require_once __DIR__ . '/../config/pdo.php';
 
 // Récupérer les plats
 
-function getAllPlats() {
+function getAllPlats()
+{
     global $pdo;
     $stmt = $pdo->prepare("SELECT plats.*, categories.nom AS type, cuisiniers.nom AS cuisinier
                            FROM plats
@@ -15,7 +16,8 @@ function getAllPlats() {
 }
 
 // Ajouter un plat
-function createPlat($nom, $type_id, $description, $cuisinier_id) {
+function createPlat($nom, $type_id, $description, $cuisinier_id)
+{
     global $pdo;
     $stmt = $pdo->prepare("
         INSERT INTO plats (nom, type_id, description, cuisinier_id)
@@ -27,10 +29,11 @@ function createPlat($nom, $type_id, $description, $cuisinier_id) {
         ':description' => $description,
         ':cuisinier_id' => $cuisinier_id
     ]);
+}
 
-    function deletePlat($id) {
-        global $pdo;
-        $stmt = $pdo->prepare("DELETE FROM plats WHERE id = :id");
-        return $stmt->execute([':id' => $id]);
-    }
+function deletePlat($id)
+{
+    global $pdo;
+    $query = $pdo->prepare("DELETE FROM plats WHERE id = :id");
+    return $query->execute([':id' => $id]);
 }
