@@ -30,3 +30,25 @@ function getCuisinierByEmail($email) {
     $stmt->execute([':email' => $email]);
     return $stmt->fetch(PDO::FETCH_ASSOC);
 }
+function getCuisinierById($id) {
+    global $pdo;
+    $stmt = $pdo->prepare("SELECT * FROM cuisiniers WHERE id = :id");
+    $stmt->execute([':id' => $id]);
+    return $stmt->fetch(PDO::FETCH_ASSOC);
+}
+function updateCuisinier ($id, $nom, $specialite, $email, $password, $avatar = null) {
+    global $pdo;
+    $stmt = $pdo->prepare("
+        UPDATE cuisiniers
+        SET nom = :nom, specialite = :specialite, email = :email, password = :password, avatar = :avatar
+        WHERE id = :id
+    ");
+    return $stmt->execute([
+        ':id' => $id,
+        ':nom' => $nom,
+        ':specialite' => $specialite,
+        ':email' => $email,
+        ':password' => $password,
+        ':avatar' => $avatar
+    ]);
+}

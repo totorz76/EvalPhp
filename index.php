@@ -1,4 +1,5 @@
 <?php
+session_start();
 require_once __DIR__ . '/config/pdo.php';
 require_once __DIR__ . '/config/routes.php';
 include PATH_PROJET . '/model/Cuisiners.php';
