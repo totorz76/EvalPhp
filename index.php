@@ -13,5 +13,8 @@ if (!array_key_exists($page, $routes)) {
     require $routes['404'];
     exit;
 }
+include PATH_PROJET . '/public/templates/header.html.php';
 
 require $routes[$page];
+
+include PATH_PROJET . '/public/templates/footer.html.php';

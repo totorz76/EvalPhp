@@ -11,5 +11,6 @@ $routes = [
     'DeletePlats' => PATH_PROJET . '/controllers/DeletePlats.php',
     'Register' => PATH_PROJET . '/controllers/Register.php',
     'Login' => PATH_PROJET . '/controllers/Login.php',
+    'Logout' => PATH_PROJET . '/controllers/Logout.php',
 
 ];

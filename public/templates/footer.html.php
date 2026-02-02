@@ -1,0 +1,1 @@
+<p>Manger c'est la vie</p>
