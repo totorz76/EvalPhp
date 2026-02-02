@@ -1,21 +1,47 @@
-<form method="POST" action="">
-    <input type="hidden" name="csrf_token" value="<?= $_SESSION['csrf_token'] ?>">
-
-    <div>
-        <label for="email">Email :</label>
-        <input type="email" name="email" id="email" value="<?= htmlspecialchars($_POST['email'] ?? '') ?>" required>
-    </div>
-
-    <div>
-        <label for="password">Mot de passe :</label>
-        <input type="password" name="password" id="password" required>
-    </div>
+<main class="container my-5" style="max-width: 450px;">
+    <h2 class="mb-4">Connexion</h2>
 
     <?php if (!empty($error)): ?>
-        <p><?= htmlspecialchars($error) ?></p>
+        <div class="alert alert-danger">
+            <?= htmlspecialchars($error) ?>
+        </div>
     <?php endif; ?>
 
-    <button type="submit">Se connecter</button>
-</form>
+    <form method="POST" class="needs-validation" novalidate>
+        <!-- CSRF token -->
+        <input type="hidden" name="csrf_token" value="<?= $_SESSION['csrf_token'] ?>">
 
-<p>Vous n'avez pas encore de compte ? <a href="?page=register">S'inscrire</a></p>
+        <!-- Email -->
+        <div class="mb-3">
+            <label for="email" class="form-label">Email</label>
+            <input
+                type="email"
+                id="email"
+                name="email"
+                class="form-control"
+                value="<?= htmlspecialchars($_POST['email'] ?? '') ?>"
+                required
+            >
+        </div>
+
+        <!-- Mot de passe -->
+        <div class="mb-3">
+            <label for="password" class="form-label">Mot de passe</label>
+            <input
+                type="password"
+                id="password"
+                name="password"
+                class="form-control"
+                required
+            >
+        </div>
+
+        <!-- Bouton submit -->
+        <button type="submit" class="btn btn-primary w-100">Se connecter</button>
+    </form>
+
+    <p class="mt-3 text-center">
+        Vous n'avez pas encore de compte ? 
+        <a href="?page=Register">S'inscrire</a>
+    </p>
+</main>
