@@ -14,6 +14,10 @@
                     <td><?= $plat['type'] ?></td>
                     <td><?= $plat['description'] ?></td>
                     <td><?= $plat['cuisinier'] ?></td>
+                    <td>
+                        <a href="?page=EditPlats&id=<?= $plat['id'] ?>">Modifier</a>
+                        <a href="?page=DeletePlats&id=<?= $plat['id'] ?>">Supprimer</a>
+                    </td>
                 </tr>
             <?php endforeach; ?>
         </tbody>
