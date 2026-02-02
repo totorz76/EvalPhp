@@ -25,7 +25,7 @@
 
 1. **Cloner le dépôt**
 
-
+```
 
 git clone <URL_DU_DEPOT>
 cd EvalPhp
@@ -38,8 +38,11 @@ USE cuisine;
 -- Importer le fichier SQL fourni
 SOURCE path/to/database.sql;
 
+```
 
 3. **Configurer la connexion PDO**
+
+```
 
 Copier config/pdo.example.php en config/pdo.php
 
@@ -57,22 +60,38 @@ $pdo = new PDO($dsn, $user, $pass, [
     PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
 ]);
 
+```
+
 4. **Installer le dossier JSON pour les citations**
+
+```
 
 Copier le fichier karadoc.json dans public/assets/karadoc.json
 
 Exemple de structure JSON :
 
+```
+
 5. **Ajouter le dossier uploads au gitignore**
+
+```
 
 /uploads/
 
 Les avatars uploadés seront stockés ici.
 
+```
+
 6. **Lancer le serveur PHP**
+
+```
 php -S localhost:8080
 
+```
+
 ##Arboresence
+
+```
 
 EvalPhp/
 ├─ config/
@@ -110,8 +129,12 @@ EvalPhp/
 ├─ 404.php
 └─ README.md
 
+```
 
 ## Sécurité
+
+```
+
 
 Les mots de passe sont hachés avec password_hash().
 
@@ -123,8 +146,11 @@ Les cuisiniers ne peuvent modifier ou supprimer que leurs propres plats.
 
 Vérification côté serveur pour les champs obligatoires et formats (email, mot de passe, avatar).
 
+```
 
 ## Technologies utilisées
+
+```
 
 PHP 8+
 
@@ -134,7 +160,11 @@ Bootstrap 5 (Slate)
 
 JSON pour les citations Karadoc
 
+```
+
 ## Notes
+
+```
 
 Les citations sont stockées localement dans public/assets/karadoc.json.
 
