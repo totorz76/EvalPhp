@@ -37,3 +37,27 @@ function deletePlat($id)
     $query = $pdo->prepare("DELETE FROM plats WHERE id = :id");
     return $query->execute([':id' => $id]);
 }
+
+function updatePlats($id, $nom, $type_id, $description, $cuisinier_id)
+{
+    global $pdo;
+    $stmt = $pdo->prepare("
+        UPDATE plats
+        SET nom = :nom, type_id = :type_id, description = :description, cuisinier_id = :cuisinier_id
+        WHERE id = :id
+    ");
+    return $stmt->execute([
+        ':id' => $id,
+        ':nom' => $nom,
+        ':type_id' => $type_id,
+        ':description' => $description,
+        ':cuisinier_id' => $cuisinier_id
+    ]);
+}
+function getPlatById($id)
+{
+    global $pdo;
+    $stmt = $pdo->prepare("SELECT * FROM plats WHERE id = :id");
+    $stmt->execute([':id' => $id]);
+    return $stmt->fetch(PDO::FETCH_ASSOC);
+}
