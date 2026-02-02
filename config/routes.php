@@ -4,7 +4,7 @@ define("PATH_PROJET", $_SERVER['DOCUMENT_ROOT'] . "/EvalPhp");
 define("WEB_ROOT", "/EvalPhp");
 
 $routes = [
-    'home' => PATH_PROJET . '/public/templates/accueil.html.php',
+    'home' => PATH_PROJET . '/controllers/PublicGetAllPlat.php',
     '404' => PATH_PROJET . '/404.php',
     'AddPlats' => PATH_PROJET . '/controllers/AddPlats.php',
     'ListPlats' => PATH_PROJET . '/controllers/ListPlats.php',
