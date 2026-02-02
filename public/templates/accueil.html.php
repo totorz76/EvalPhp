@@ -9,5 +9,7 @@
     <h1>OUI</h1>
     <a href="?page=AddPlats">Ajouter un plat</a>
     <a href="?page=ListPlats">Liste des Plats</a>
+    <a href="?page=Register">S'inscrire</a>
+    <a href="?page=Login">Connexion</a>
 </body>
 </html>

@@ -9,5 +9,7 @@ $routes = [
     'AddPlats' => PATH_PROJET . '/controllers/AddPlats.php',
     'ListPlats' => PATH_PROJET . '/controllers/ListPlats.php',
     'DeletePlats' => PATH_PROJET . '/controllers/DeletePlats.php',
+    'Register' => PATH_PROJET . '/controllers/Register.php',
+    'Login' => PATH_PROJET . '/controllers/Login.php',
 
 ];
