@@ -1,4 +1,4 @@
-<h1>OUI</h1>
+<h1>Bienvenue à la Bonne Blanquette</h1>
 <table>
     <thead>
         <tr>
