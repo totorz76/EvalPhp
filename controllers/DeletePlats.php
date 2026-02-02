@@ -1,4 +1,9 @@
 <?php
+session_start();
+if (!isset($_SESSION['cuisinier_id'])) {
+    header('Location: ?page=Login');
+    exit;
+}
 
 if(isset($_GET['id'])) {
     $id = $_GET['id'];
